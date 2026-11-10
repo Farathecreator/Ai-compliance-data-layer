@@ -1,0 +1,9 @@
+streamlit>=1.40
+pandas>=2.0
+altair>=5.0
+# For the compliance data layer (names and places):
+spacy>=3.7
+# then run: python -m spacy download en_core_web_md
+# Optional, only for real-model mode:
+# anthropic>=0.40
+# openai>=1.50   (needed for groq, gemini and openai)

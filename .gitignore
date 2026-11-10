@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.env
+data/compliance.db
+data/runs_backup_*.db
+*.zip
+*.txz
+Claude outputs/
+data/real_datasets/*_robustness_dataset.jsonl
