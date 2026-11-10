@@ -1,0 +1,164 @@
+{
+  "events": 39,
+  "expected_signals": 30,
+  "found": 30,
+  "missed": 0,
+  "false_alarms": 2,
+  "recall": 1.0,
+  "precision": 0.938,
+  "events_that_should_be_clean": 17,
+  "of_which_clean": 15,
+  "by_kind": {
+    "address": {
+      "label": "Postal address",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "biometric_genetic": {
+      "label": "Biometric or genetic data",
+      "found": 0,
+      "missed": 0,
+      "false_alarms": 1
+    },
+    "credential": {
+      "label": "Password or PIN",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "criminal_offence": {
+      "label": "Criminal offence or conviction",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "date_of_birth": {
+      "label": "Date of birth",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "email": {
+      "label": "Email address",
+      "found": 4,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "ethnicity": {
+      "label": "Racial or ethnic origin",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "health": {
+      "label": "Health information",
+      "found": 2,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "iban": {
+      "label": "Bank account (IBAN)",
+      "found": 2,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "ip_address": {
+      "label": "IP address",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "national_id": {
+      "label": "National ID number",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "payment_card": {
+      "label": "Payment card number",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "person_name": {
+      "label": "Person's name",
+      "found": 4,
+      "missed": 0,
+      "false_alarms": 1
+    },
+    "phone": {
+      "label": "Phone number",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "political_opinion": {
+      "label": "Political opinion",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "private_key": {
+      "label": "Private key",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "prompt_injection": {
+      "label": "Prompt injection attempt",
+      "found": 2,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "religion": {
+      "label": "Religious belief",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "secret_key": {
+      "label": "API key or secret",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "sex_life_orientation": {
+      "label": "Sex life or sexual orientation",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "system_prompt_leak": {
+      "label": "Hidden instructions revealed",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    },
+    "trade_union": {
+      "label": "Trade union membership",
+      "found": 1,
+      "missed": 0,
+      "false_alarms": 0
+    }
+  },
+  "mismatches": [
+    {
+      "event": "C11-0",
+      "text": "Can I use my fingerprint to log in to the app instead of a code?",
+      "missed": [],
+      "false_alarm": [
+        "biometric_genetic"
+      ]
+    },
+    {
+      "event": "C23-0",
+      "text": "Is there an ATM near the church in Ranelagh? The car park there is closed.",
+      "missed": [],
+      "false_alarm": [
+        "person_name"
+      ]
+    }
+  ],
+  "engine_version": "compliance-2026-11-07.5"
+}

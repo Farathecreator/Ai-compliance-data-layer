@@ -1,0 +1,256 @@
+{
+  "sentences": 1000,
+  "recall_by_type": {
+    "PERSON": {
+      "label": "Names",
+      "found": 432,
+      "total": 586,
+      "recall": 0.737,
+      "examples_missed": [
+        "Szabina J Gelencsér",
+        "Rubija",
+        "Johannes Varvio",
+        "Kónya",
+        "patricia desrosiers",
+        "Ravil G Yefimov"
+      ]
+    },
+    "EMAIL_ADDRESS": {
+      "label": "Email addresses",
+      "found": 33,
+      "total": 33,
+      "recall": 1.0,
+      "examples_missed": []
+    },
+    "PHONE_NUMBER": {
+      "label": "Phone numbers",
+      "found": 48,
+      "total": 58,
+      "recall": 0.828,
+      "examples_missed": [
+        "07700 063 966",
+        "(37) 788-063",
+        "78 651 450",
+        "03.93.92.16.85",
+        "01.84.17.61.18",
+        "781 1704"
+      ]
+    },
+    "STREET_ADDRESS": {
+      "label": "Street addresses",
+      "found": 249,
+      "total": 369,
+      "recall": 0.675,
+      "examples_missed": [
+        "62488",
+        "Allika 46",
+        "20789",
+        "Marina Fort",
+        "17151",
+        "34796"
+      ]
+    },
+    "CREDIT_CARD": {
+      "label": "Payment cards",
+      "found": 92,
+      "total": 92,
+      "recall": 1.0,
+      "examples_missed": []
+    },
+    "IBAN_CODE": {
+      "label": "IBANs",
+      "found": 13,
+      "total": 14,
+      "recall": 0.929,
+      "examples_missed": [
+        "gb42nawi04454264788619"
+      ]
+    },
+    "US_SSN": {
+      "label": "National ID (US SSN)",
+      "found": 13,
+      "total": 13,
+      "recall": 1.0,
+      "examples_missed": []
+    },
+    "IP_ADDRESS": {
+      "label": "IP addresses",
+      "found": 11,
+      "total": 11,
+      "recall": 1.0,
+      "examples_missed": []
+    },
+    "AGE": {
+      "label": "Ages",
+      "found": 49,
+      "total": 52,
+      "recall": 0.942,
+      "examples_missed": [
+        "78",
+        "64",
+        "65"
+      ]
+    },
+    "NRP": {
+      "label": "Nationality, religion or political group",
+      "found": 15,
+      "total": 32,
+      "recall": 0.469,
+      "examples_missed": [
+        "cambodian",
+        "English",
+        "shiis",
+        "Japanese",
+        "American",
+        "Czech"
+      ]
+    },
+    "GPE": {
+      "label": "Place names",
+      "found": 142,
+      "total": 267,
+      "recall": 0.532,
+      "examples_missed": [
+        "SK",
+        "LAPPEENRANTA",
+        "Riisa",
+        "ΛΕΥΚΩΣΙΑ",
+        "UPTON SCUDAMORE",
+        "Canada"
+      ]
+    }
+  },
+  "precision_by_kind": {
+    "address": {
+      "label": "Postal address",
+      "correct": 256,
+      "detections": 256,
+      "precision": 1.0,
+      "examples_false_alarm": []
+    },
+    "age": {
+      "label": "Age",
+      "correct": 49,
+      "detections": 49,
+      "precision": 1.0,
+      "examples_false_alarm": []
+    },
+    "date_of_birth": {
+      "label": "Date of birth",
+      "correct": 6,
+      "detections": 6,
+      "precision": 1.0,
+      "examples_false_alarm": []
+    },
+    "email": {
+      "label": "Email address",
+      "correct": 33,
+      "detections": 33,
+      "precision": 1.0,
+      "examples_false_alarm": []
+    },
+    "iban": {
+      "label": "Bank account (IBAN)",
+      "correct": 13,
+      "detections": 13,
+      "precision": 1.0,
+      "examples_false_alarm": []
+    },
+    "ip_address": {
+      "label": "IP address",
+      "correct": 11,
+      "detections": 13,
+      "precision": 0.846,
+      "examples_false_alarm": [
+        "'03.93.92.16' in: 'Julcsa Kárpáthy\\nMhealthcoach\\n50668 Kiannonkatu 98 Apt. 105, ISHAM, Uni'",
+        "'01.84.17.61' in: 'Can someone call me on 01.84.17.61.18? I have some questions about ope'"
+      ]
+    },
+    "location": {
+      "label": "Place name",
+      "correct": 203,
+      "detections": 244,
+      "precision": 0.832,
+      "examples_false_alarm": [
+        "'Kónya' in: 'Microbilt Corporation is the brainchild of our 3 founders: Kónya, Beck'",
+        "'Ravil G Yefimov' in: 'Have you been to a Ravil G Yefimov concert before?'",
+        "'Hawkins' in: 'Tomomi is from Hawkins, Richardson and Santana'",
+        "\"the White Stripes'\" in: '\"The big three\" of The Big Three Killed My Baby are the car manufactur'",
+        "'Mary' in: 'They had 6: Efimiya, Mary, Ariana, Isabel, Teresa and Jodi.'",
+        "'owens' in: 'owens, duran and oneal\\n\\nthe corner of heiligengeistbrücke 77 and minik'"
+      ]
+    },
+    "national_id": {
+      "label": "National ID number",
+      "correct": 13,
+      "detections": 13,
+      "precision": 1.0,
+      "examples_false_alarm": []
+    },
+    "nationality": {
+      "label": "Nationality",
+      "correct": 15,
+      "detections": 31,
+      "precision": 0.484,
+      "examples_false_alarm": [
+        "'Riisa' in: 'William Hughes\\n\\n20789 Allika 46\\n Suite 501\\n Riisa\\n\\n Estonia 62488'",
+        "'Greek' in: 'We moved here from Cyprus (Greek)'",
+        "'Passauer' in: 'The letter arrived at 760 Passauer Strasse 33, Cite Guedouala, Tunisia'",
+        "'Greek' in: \"So where are we meeting? There's this nice new Croatian place downtown\"",
+        "'Greek' in: 'Zizi Kónya\\nEnigmaio\\n5850 Jana Nerudy 894\\nΑΓΛΑΝΤΖΙΑ (ΑΓΛΑΓΓΙΑ)\\n, NI\\n Cy'",
+        "'Demystdata' in: '\"The big three\" of The Big Three Killed My Baby are the car manufactur'"
+      ]
+    },
+    "payment_card": {
+      "label": "Payment card number",
+      "correct": 92,
+      "detections": 93,
+      "precision": 0.989,
+      "examples_false_alarm": [
+        "'62928788557186' in: \"My driver's license number is U62928788557186\""
+      ]
+    },
+    "person_name": {
+      "label": "Person's name",
+      "correct": 432,
+      "detections": 532,
+      "precision": 0.812,
+      "examples_false_alarm": [
+        "'Verdafero' in: 'Verdafero is the brainchild of our 3 founders: Eklund, Michael and Hod'",
+        "'Király' in: 'The Propublica office is at Růžena and Király u. 15.'",
+        "'Metallica' in: 'The title refers to 1668 Glyn St street in Highveld. It was on this st'",
+        "'Richardson' in: 'Tomomi is from Hawkins, Richardson and Santana'",
+        "'Santana' in: 'Tomomi is from Hawkins, Richardson and Santana'",
+        "'Mora de Rubielos' in: 'I need to add my addresses, here they are: 370 3911 Fourth Avenue Suit'"
+      ]
+    },
+    "phone": {
+      "label": "Phone number",
+      "correct": 48,
+      "detections": 49,
+      "precision": 0.98,
+      "examples_false_alarm": [
+        "'94941 2505' in: 'Please return to 94941 2505 Heatherleigh Suite 620 Apt. 581, ΠΑΦΟΣ, Cy'"
+      ]
+    }
+  },
+  "overall": {
+    "labelled_values": 1527,
+    "found": 1097,
+    "recall": 0.718,
+    "detections": 1332,
+    "correct_detections": 1171,
+    "precision": 0.879
+  },
+  "split": "test",
+  "dataset": "Microsoft Presidio research, synth_dataset_v2.json (MIT)",
+  "language_model": "spaCy en_core_web_md",
+  "not_scored": [
+    "ORGANIZATION",
+    "TITLE",
+    "DATE_TIME",
+    "DOMAIN_NAME",
+    "ZIP_CODE",
+    "US_DRIVER_LICENSE"
+  ]
+}

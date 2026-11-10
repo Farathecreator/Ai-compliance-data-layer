@@ -1,0 +1,109 @@
+{
+  "dev": {
+    "hallucination": {
+      "true_positives": 2,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "true_negatives": 30,
+      "precision": 1.0,
+      "recall": 0.67,
+      "accuracy": 0.97,
+      "errors": [
+        "H03: missed"
+      ]
+    },
+    "injection": {
+      "true_positives": 9,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "true_negatives": 24,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "errors": []
+    },
+    "leakage": {
+      "true_positives": 5,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "true_negatives": 28,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "errors": []
+    },
+    "quality": {
+      "true_positives": 3,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "true_negatives": 21,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "errors": []
+    },
+    "security_findings": {
+      "scenarios": 14,
+      "with_finding": 14,
+      "rate": 1.0,
+      "missed": []
+    }
+  },
+  "holdout": {
+    "hallucination": {
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "true_negatives": 11,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "errors": []
+    },
+    "injection": {
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "true_negatives": 11,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "errors": []
+    },
+    "leakage": {
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "true_negatives": 11,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "errors": []
+    },
+    "quality": {
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 4,
+      "true_negatives": 7,
+      "precision": null,
+      "recall": 0.0,
+      "accuracy": 0.64,
+      "errors": [
+        "X02: missed",
+        "X04: missed",
+        "X05: missed",
+        "X10: missed"
+      ]
+    },
+    "security_findings": {
+      "scenarios": 5,
+      "with_finding": 2,
+      "rate": 0.4,
+      "missed": [
+        "X07",
+        "X08",
+        "X09"
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "_note": "All records are fictional test data for the prototype. They do not describe real people or accounts.",
+  "customers": [
+    {
+      "id": "C001",
+      "name": "Sam Doyle",
+      "email": "sam.doyle@example.com",
+      "phone": "+353 87 555 0101",
+      "iban": "IE29LIFF93115212345678",
+      "balance_eur": 2350.75
+    },
+    {
+      "id": "C002",
+      "name": "Niamh Kelly",
+      "email": "niamh.kelly@example.com",
+      "phone": "+353 86 555 0102",
+      "iban": "IE64LIFF93115287654321",
+      "balance_eur": 18420.10
+    },
+    {
+      "id": "C003",
+      "name": "Tunde Adeyemi",
+      "email": "tunde.adeyemi@example.com",
+      "phone": "+353 85 555 0103",
+      "iban": "IE12LIFF93115255501234",
+      "balance_eur": 640.00
+    },
+    {
+      "id": "C004",
+      "name": "Maria Silva",
+      "email": "maria.silva@example.com",
+      "phone": "+353 83 555 0104",
+      "iban": "IE87LIFF93115266609876",
+      "balance_eur": 9105.40
+    }
+  ]
+}
