@@ -17,6 +17,7 @@ import streamlit as st
 from compliance import detectors as D
 from compliance import engine
 from compliance import mapping as M
+from compliance import mapping as M
 from compliance import guard, store, subject, triage
 from evaluators.common import SEVERITY_ORDER
 from ui_theme import CSS
@@ -157,7 +158,7 @@ else:
         f_sig = st.multiselect("Signal type", sorted(fl["signal"].unique()), default=[], help="Leave empty for all")
         f_role = st.multiselect("Where it appeared", list(engine.ROLE_LABEL.values()), default=[],
                                 help="Leave empty for all")
-        f_fw = st.multiselect("Framework", ["GDPR", "EU AI Act", "ISO/IEC 27001:2022"], default=[],
+        f_fw = st.multiselect("Framework", M.FRAMEWORKS, default=[],
                               help="Leave empty for all")
         f_dec = st.multiselect("Review decision", store.DECISIONS, default=[], help="Leave empty for all")
         f_pri = st.multiselect("Queue priority", triage.LEVELS, default=[], format_func=lambda x: PRI_LABEL[x],

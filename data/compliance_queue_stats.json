@@ -1,19 +1,19 @@
 {
   "without_guard": {
-    "flags": 478,
-    "conversations": 321,
+    "flags": 509,
+    "conversations": 332,
     "urgent": 9,
-    "review": 211,
-    "low": 101
+    "review": 212,
+    "low": 111
   },
   "with_guard": {
-    "flags": 478,
-    "conversations": 321,
+    "flags": 509,
+    "conversations": 332,
     "urgent": 5,
     "review": 99,
-    "low": 217
+    "low": 228
   },
-  "masked_before_model": 321,
+  "masked_before_model": 355,
   "blocked_before_model": 4,
   "stored_mode": "with guard (replayed)",
   "engine_version": "compliance-2026-11-07.5"

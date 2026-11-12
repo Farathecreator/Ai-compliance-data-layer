@@ -2,16 +2,19 @@
 
 This project has two parts that share one engine:
 
-- **AI Compliance Data Layer (Challenge 7):** reads the text flowing through an AI system and flags personal, special-category and security-sensitive information, with evidence, an explanation and the GDPR, EU AI Act and ISO/IEC 27001 areas to review. Every flag is a potential concern for a person to decide on, not a legal conclusion. See [AI Compliance Data Layer](#ai-compliance-data-layer-challenge-7) below.
+- **AI Compliance Data Layer (Challenge 7):** reads the text flowing through an AI system and flags personal, special-category and security-sensitive information, with evidence, an explanation and the areas to review in six frameworks: GDPR, the EU AI Act, ISO/IEC 27001, DORA, PCI DSS v4.0.1 and the NIST AI RMF. Every flag is a potential concern for a person to decide on, not a legal conclusion. See [AI Compliance Data Layer](#ai-compliance-data-layer-challenge-7) below.
 - **Agent Evaluation Gateway (Challenge 6):** checks every answer of an AI agent for hallucination, prompt injection, data leakage and quality.
 
 ## AI Compliance Data Layer (Challenge 7)
 
 ```powershell
-python -m pip install spacy
-# language model for names and places (about 34 MB); installed directly because `spacy download` can fail on newer setups
+python -m pip install spacy spacy-transformers
+# language models for names and places; installed directly because `spacy download` can fail on newer setups
+# transformer model (most accurate, about 440 MB):
+python -m pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl
+# medium model (smaller fallback, about 34 MB):
 python -m pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl
-python run_compliance.py                     # process the AI events (about 1 minute)
+python run_compliance.py                     # process the AI events (about 4 minutes with the transformer model)
 python -m streamlit run compliance_dashboard.py
 ```
 
@@ -40,7 +43,7 @@ Also `check(text)` for a one-off check with nothing stored, and `find_person(val
 
 **Three ways to connect it in a bank:** (1) read the AI logs the bank already keeps (`python run_compliance.py --file logs.jsonl`), the pilot; (2) the SDK inside one AI app, which prevents leaks; (3) a gateway in front of all AI traffic, which is roadmap.
 
-- `python evaluate_compliance.py --split test` measures accuracy on 1,000 held-out labelled sentences (Microsoft Presidio data, MIT licence). Result: **72% of personal-data values found, 88% of flags correct**.
+- `python evaluate_compliance.py --split test` measures accuracy on 1,000 held-out labelled sentences (Microsoft Presidio data, MIT licence). Result: **84% of personal-data values found, 97% of flags correct** with the transformer model (72% and 88% in the first version; 77% and 89% with the medium model).
 - `python run_compliance.py --file my_events.jsonl` processes your own events, one JSON object per line: `{"text": "...", "role": "user_message", "session_id": "...", "source": "..."}`. Roles: `user_message`, `ai_response`, `retrieved_document`, `tool_result`, `system_log`.
 - Reviewer decisions are kept in `data/compliance.db` and survive re-processing.
 - Method, accuracy and limits: `docs/COMPLIANCE_METHODOLOGY.md`.

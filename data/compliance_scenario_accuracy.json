@@ -3,11 +3,11 @@
   "expected_signals": 30,
   "found": 30,
   "missed": 0,
-  "false_alarms": 2,
+  "false_alarms": 1,
   "recall": 1.0,
-  "precision": 0.938,
+  "precision": 0.968,
   "events_that_should_be_clean": 17,
-  "of_which_clean": 15,
+  "of_which_clean": 16,
   "by_kind": {
     "address": {
       "label": "Postal address",
@@ -85,7 +85,7 @@
       "label": "Person's name",
       "found": 4,
       "missed": 0,
-      "false_alarms": 1
+      "false_alarms": 0
     },
     "phone": {
       "label": "Phone number",
@@ -149,14 +149,6 @@
       "missed": [],
       "false_alarm": [
         "biometric_genetic"
-      ]
-    },
-    {
-      "event": "C23-0",
-      "text": "Is there an ATM near the church in Ranelagh? The car park there is closed.",
-      "missed": [],
-      "false_alarm": [
-        "person_name"
       ]
     }
   ],

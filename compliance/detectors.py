@@ -119,8 +119,20 @@ STREET = re.compile(
 STREET_WORDS = (r"strasse|straße|gasse|weg|platz|gade|vej|gatan|vägen|katu|tie|straat|laan|plein|rue|avenue|boulevard|"
                 r"via|viale|piazza|calle|avenida|rua|travessa|ulica|utca|u\.|street|road|lane|drive|terrace")
 INTL_STREET = re.compile(
-    r"(?:\b\d{1,6}\s+)?(?:\b(?:Rua|Via|Rue|Calle|Avenida|Viale|Piazza|Travessa|Ulica)\s+(?:\w+\s+){0,3}\w+\s+\d{1,5}\b"
+    r"(?:\b\d{1,6}\s+)?(?:\b(?:Rua|Via|Rue|Calle|Avenida|Viale|Piazza|Travessa|Ulica|ul\.|Av\.?)\s+(?:\w+\s+){0,3}\w+\s+\d{1,5}\b"
     r"|\b[\w'-]*(?:" + STREET_WORDS + r")\s+\d{1,5}\b)", re.I)
+# A postcode written after the country, as on the last line of an address ("Denmark 35018")
+COUNTRY_POSTCODE = re.compile(
+    r"\b(?:Ireland|United Kingdom|UK|Denmark|Finland|Sweden|Norway|Iceland|Greenland(?:er)?|Estonia|Latvia|Lithuania|Poland|"
+    r"Germany|Austria|Switzerland|Netherlands|Belgium|Luxembourg|France|Spain|Portugal|Italy|Malta|Greece|Cyprus|Slovenia|"
+    r"Croatia|Slovakia|Czech Republic|Czechia|Hungary|Romania|Bulgaria|Serbia|Ukraine|Turkey|Tunisia|Morocco|Algeria|Egypt|"
+    r"South Africa|Australia|New Zealand|Canada|United States|USA|Brazil|Mexico|Argentina|Chile|India|Japan|China)"
+    r"[ \t]+(\d{3,6})\b")
+# A whole line that looks like a street line in an address block ("91215 Harjukuja 54", "Skogstien 106 Apt. 12")
+ADDRESS_LINE = re.compile(
+    r"^[ \t>?]*((?:\d{1,6}[ \t]+)?[A-ZÀ-ÖØ-ÞĀ-Ž][\wÀ-ÿĀ-ž'.-]{3,}(?:[ \t]+[\wÀ-ÿĀ-ž'.-]+){0,2}[ \t]+\d{1,5}"
+    r"(?:[ \t]+(?:Apt\.?|Suite)[ \t]*\d{1,5})?)[ \t]*$", re.M)
+LEAD_NUMBER = re.compile(r"(?<![\w.])(\d{1,6})[ \t]+$")
 UNIT = re.compile(r"\b(?:Apt\.?|Apartment|Suite|Unit|Flat)\s*#?\d{1,5}\b|\b(?:P\.?O\.? Box|PSC)\s*\d{1,6}(?:,\s*Box\s*\d{1,6})?", re.I)
 ADDRESS_CUE = re.compile(r"\b(?:address(?:es)?(?: is| was)?\s*(?::|is|here they are:)?|lives? at|living at|located at|"
                          r"(?:office|shop|store|house|home) is (?:at|on)|meet (?:me|you) at|send (?:it|them|a new one)? ?to|"
@@ -239,7 +251,10 @@ def nlp():
         except Exception as e:  # spaCy not installed
             _NLP_ERROR = f"{type(e).__name__}: {e}"
             return None
-        for name in ("en_core_web_md", "en_core_web_sm"):  # medium model is more accurate on names
+        import os
+        preferred = os.environ.get("AI_COMPLIANCE_SPACY_MODEL")  # e.g. en_core_web_trf for the transformer model
+        # The transformer model is the most accurate (names, places, nationalities); the medium model is the fallback
+        for name in tuple(n for n in (preferred, "en_core_web_trf", "en_core_web_md", "en_core_web_sm") if n):
             try:
                 _NLP = spacy.load(name, disable=["lemmatizer"])
                 _NLP.meta["_used"] = name
@@ -340,15 +355,30 @@ def detect(text: str) -> list[Signal]:
         if not _overlaps(m.span(), taken):
             add(Signal("address", "personal", m.start(), m.end(), m.group(), 0.8, "pattern",
                        "An Irish Eircode, which points to a single address."))
+    def lead(start: int) -> int:
+        """Include a building number written just before the street ("935 69 Gordon Terrace")."""
+        mm = LEAD_NUMBER.search(text[max(0, start - 10):start])
+        return start - (len(mm.group(0)) if mm else 0)
     for m in STREET.finditer(text):
         if not _overlaps(m.span(), taken):
-            add(Signal("address", "personal", m.start(), m.end(), m.group().strip(), 0.75, "pattern",
+            st = lead(m.start())
+            add(Signal("address", "personal", st, m.end(), text[st:m.end()].strip(), 0.75, "pattern",
                        "A street address."))
     for rx in (INTL_STREET, UNIT):
         for m in rx.finditer(text):
             if not _overlaps(m.span(), taken):
-                add(Signal("address", "personal", m.start(), m.end(), m.group().strip(), 0.65, "pattern",
+                st = lead(m.start())
+                add(Signal("address", "personal", st, m.end(), text[st:m.end()].strip(), 0.65, "pattern",
                            "Part of a postal address."))
+    for m in COUNTRY_POSTCODE.finditer(text):
+        if not _overlaps(m.span(1), taken):
+            add(Signal("address", "personal", m.start(1), m.end(1), m.group(1), 0.7, "pattern",
+                       "A postcode written after a country name."))
+    if text.count("\n") >= 2:  # only in multi-line text, where address blocks appear
+        for m in ADDRESS_LINE.finditer(text):
+            if not _overlaps(m.span(1), taken) and not re.search(r"\b(?:19|20)\d{2}$", m.group(1)):
+                add(Signal("address", "personal", m.start(1), m.end(1), m.group(1), 0.6, "pattern",
+                           "A street line in an address block."))
     for m in ADDRESS_CUE.finditer(text):
         rest = text[m.end():]
         stop = re.search(r"\.\s|\n\s*\n|,\s+(?:and|but|so|please)\b|$", rest)
